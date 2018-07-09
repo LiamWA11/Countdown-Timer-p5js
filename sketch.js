@@ -1,13 +1,45 @@
-function setup() {
-    createCanvas(200, 200);
-  // put setup code here
+var counter = 300;
+var startTime = 0;
+
+function convertSeconds(s)
+{
+    var seconds = nf(s % 60, 2, 0);
+    var minutes = nf(floor((s/60)%60), 2, 0);
+    var hours = nf(floor(s / 3600), 2, 0);
+
+    return hours + ':' + minutes + ':' + seconds;
 }
 
-function draw() {
-    background(200, 0, 255);
-    line(20, 30, 10, 50)
-    line(20, 30, 30, 50)
-    line(10, 50, 30, 50)
+function setup()
+{
+    startTime = millis();
 
-  // put drawing code here
+
+    noCanvas();
+
+    var params = getURLParams();
+    var counter = params.seconds;
+
+    var timer = select("#timer");
+    var body = select("#body");
+    var school = select("#school");
+
+    timer.html(convertSeconds(counter));
+    body.style("background-color: #"+params.background_colour)
+    school.html((decodeURI(params.school)));
+
+    function timeIt()
+    {
+        var currentTime = floor((millis() - startTime)/1000);
+
+        timer.html(convertSeconds(counter - currentTime));
+
+        if (counter - currentTime <= 0)
+        {
+            console.log("TIMER FINISHED")
+            clearInterval(interval);
+        }
+    }
+
+    var interval = setInterval(timeIt, 500);
 }
