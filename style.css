@@ -13,3 +13,8 @@ body {
     font-family: 'Raleway', sans-serif;
     color: white;
 }
+
+.grid-custom {
+    display: grid;
+    grid-template-columns: repeat(10, 10%);
+}
