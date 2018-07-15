@@ -25,6 +25,9 @@ function setup()
 
     noCanvas();
 
+    var running = false;
+    var sx = -1;
+
     var params = getURLParams();
     var counter = params.seconds;
     var counterOriginal = counter;
@@ -36,53 +39,81 @@ function setup()
     var timer = select("#timer");
     var body = select("#body");
     var school = select("#school");
+    var timerTitle = select("#timer_title");
+    var time = select("#time");
 
     timer.html(convertSeconds(counter));
-    body.style("background-color: #"+params.background_colour)
+    body.style("background-color: #"+params.background_colour);
     school.html((decodeURI(params.school)));
+    timerTitle.html(decodeURI(params.timer_title));
 
     function timeIt()
     {
-        var currentTime = floor((millis() - startTime)/1000);
-
-        timer.html(convertSeconds(counter - currentTime));
-
-        if (counter - currentTime <= 0)
+        if (!running)
         {
-            console.log(repeatTimer)
-            if (repeatTimer === "true")
+            if (sx === -1)
             {
-                if (alternating === "true")
+                sx = second();
+                console.log(sx)
+            }
+            if (second() != sx)
+            {
+                startTime = millis()
+                running = true;
+            }
+        }
+
+        if (running)
+        {
+            var h = hour();
+            var timeSuffix = "am";
+            if (h > 12)
+            {
+                var hr = h % 12;
+                timeSuffix = "pm";
+            }
+            time.html(nf(hr, 2) + ":" + nf(minute(), 2) + ":" + nf(second(),2) + " " + timeSuffix);
+            var currentTime = floor((millis() - startTime)/1000);
+
+            timer.html(convertSeconds(counter - currentTime));
+
+            if (counter - currentTime <= 0)
+            {
+                console.log(repeatTimer)
+                if (repeatTimer === "true")
                 {
-                    if (isAlternative)
+                    if (alternating === "true")
                     {
-                        console.log("Repeating Alternative Timer")
-                        counter = alternatingCounter;
-                        startTime = millis();
-                        isAlternative = false;
+                        if (isAlternative)
+                        {
+                            console.log("Repeating Alternative Timer")
+                            counter = alternatingCounter;
+                            startTime = millis();
+                            isAlternative = false;
+                        }
+                        else
+                        {
+                            console.log("Repeating Alternative Timer")
+                            counter = counterOriginal;
+                            startTime = millis();
+                            isAlternative = true;
+                        }
                     }
                     else
                     {
-                        console.log("Repeating Alternative Timer")
+                        console.log("Repeating Timer")
                         counter = counterOriginal;
                         startTime = millis();
-                        isAlternative = true;
                     }
                 }
                 else
                 {
-                    console.log("Repeating Timer")
-                    counter = counterOriginal;
-                    startTime = millis();
+                    console.log("TIMER FINISHED")
+                    clearInterval(interval);
                 }
-            }
-            else
-            {
-                console.log("TIMER FINISHED")
-                clearInterval(interval);
             }
         }
     }
 
-    var interval = setInterval(timeIt, 100);
+    var interval = setInterval(timeIt, 10);
 }
