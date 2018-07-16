@@ -8,6 +8,10 @@
     <script src="p5/addons/p5.dom.js"></script>
     <script src="p5/addons/p5.sound.js"></script>
     <script src="preview.js"></script>
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 </head>
 <body id="body" style="background: #eef0f2; color: #4c5b5c">
@@ -31,6 +35,11 @@
                 Alternative Countdown (Seconds): <input id="input_alternate_countdown" type="text" name="alt_countdown"> <br>
             </form> <br>
             <a href="/test.html" id="button_start_timer"><button>Start Timer</button></a>
+            <br>
+            <form>
+                Start Timer at Time (hh:mm am/pm): <input id="input_start_timer_at_time" type="time" name="start_time"> <br>
+            </form>
+            <a href="/timer.html" id="button_start_timer_at_time"><button>Start Timer at Time</button></a>
         </div>
         <div style="grid-column-start: 7; grid-column-end: 10;" >
             <h2 style="text-align: center">Preview</h2>

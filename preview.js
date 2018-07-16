@@ -21,6 +21,8 @@ function setup()
     var time = select("#time");
     var preview = select("#preview");
     var startTimer = select("#button_start_timer");
+    var startTimerTime = select("#button_start_timer_at_time");
+    var startTime = select("#input_start_timer_at_time");
 
     var input_school_name = select("#input_school_name");
     var input_timer_title = select("#input_timer_title");
@@ -34,11 +36,14 @@ function setup()
 
     function updatePreview()
     {
+        console.log(startTime.value());
         timer.html(convertSeconds(input_countdown_seconds.value()));
         school.html(input_school_name.value());
         timerTitle.html(input_timer_title.value());
         preview.style("background-color: #"+input_background_colour.value()+"; color: #"+input_text_colour.value());
-        startTimer.attribute("href", "timer.html?seconds="+input_countdown_seconds.value()+"&background_colour="+input_background_colour.value()+"&school="+input_school_name.value()+"&repeats="+input_repeats.value()+"&alternating="+input_alternate.value()+"&alternating_timer="+input_alternate_countdown.value()+"&timer_title="+input_timer_title.value()+"&text_colour="+input_text_colour.value());
+        startTimer.attribute("href", "timer.html?seconds="+input_countdown_seconds.value()+"&background_colour="+input_background_colour.value()+"&school="+input_school_name.value()+"&repeats="+input_repeats.value()+"&alternating="+input_alternate.value()+"&alternating_timer="+input_alternate_countdown.value()+"&timer_title="+input_timer_title.value()+"&text_colour="+input_text_colour.value()+"&start_time=now");
+
+        startTimerTime.attribute("href", "timer.html?seconds="+input_countdown_seconds.value()+"&background_colour="+input_background_colour.value()+"&school="+input_school_name.value()+"&repeats="+input_repeats.value()+"&alternating="+input_alternate.value()+"&alternating_timer="+input_alternate_countdown.value()+"&timer_title="+input_timer_title.value()+"&text_colour="+input_text_colour.value()+"&start_time=now");
 
         var h = hour();
         var timeSuffix = "am";
