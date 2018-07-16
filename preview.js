@@ -13,17 +13,22 @@ function convertSeconds(s)
 function setup()
 {
     noCanvas();
+    var a = "a";
 
     var timer = select("#timer");
     var school = select("#school");
     var timerTitle = select("#timer_title");
     var time = select("#time");
     var preview = select("#preview");
+    var startTimer = select("#button_start_timer");
 
     var input_school_name = select("#input_school_name");
     var input_timer_title = select("#input_timer_title");
     var input_background_colour = select("#input_background_colour");
     var input_countdown_seconds = select("#input_countdown_seconds");
+    var input_repeats = select("#input_repeats");
+    var input_alternate = select("#input_alternate");
+    var input_alternate_countdown = select("#input_alternate_countdown");
 
 
     function updatePreview()
@@ -31,7 +36,8 @@ function setup()
         timer.html(convertSeconds(input_countdown_seconds.value()));
         school.html(input_school_name.value());
         timerTitle.html(input_timer_title.value());
-        preview.style("background-color: #"+input_background_colour);
+        preview.style("background-color: #"+input_background_colour.value());
+        startTimer.attribute("href", "timer.html?seconds="+input_countdown_seconds.value()+"&background_colour="+input_background_colour.value()+"&school="+input_school_name.value()+"&repeats="+input_repeats.value()+"&alternating="+input_alternate.value()+"&alternating_timer="+input_alternate_countdown.value()+"&timer_title="+input_timer_title.value());
 
         var h = hour();
         var timeSuffix = "am";

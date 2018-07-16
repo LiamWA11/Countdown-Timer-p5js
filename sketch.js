@@ -12,6 +12,7 @@ function convertSeconds(s)
 
 function setup()
 {
+    console.log("Loading Timer");
     // URL Parameters:
     // seconds: Amount of seconds for timer
     // background_colour: Background colour of timer
@@ -29,6 +30,7 @@ function setup()
     var sx = -1;
 
     var params = getURLParams();
+    console.log(params);
     var counter = params.seconds;
     var counterOriginal = counter;
     var repeatTimer = params.repeats;
@@ -58,7 +60,7 @@ function setup()
             }
             if (second() != sx)
             {
-                startTime = millis()
+                startTime = millis();
                 running = true;
             }
         }
@@ -79,21 +81,21 @@ function setup()
 
             if (counter - currentTime <= 0)
             {
-                console.log(repeatTimer)
+                console.log(repeatTimer);
                 if (repeatTimer === "true")
                 {
                     if (alternating === "true")
                     {
                         if (isAlternative)
                         {
-                            console.log("Repeating Alternative Timer")
+                            console.log("Repeating Alternative Timer");
                             counter = alternatingCounter;
                             startTime = millis();
                             isAlternative = false;
                         }
                         else
                         {
-                            console.log("Repeating Alternative Timer")
+                            console.log("Repeating Alternative Timer");
                             counter = counterOriginal;
                             startTime = millis();
                             isAlternative = true;
@@ -101,14 +103,14 @@ function setup()
                     }
                     else
                     {
-                        console.log("Repeating Timer")
+                        console.log("Repeating Timer");
                         counter = counterOriginal;
                         startTime = millis();
                     }
                 }
                 else
                 {
-                    console.log("TIMER FINISHED")
+                    console.log("TIMER FINISHED");
                     clearInterval(interval);
                 }
             }
