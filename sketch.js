@@ -37,6 +37,7 @@ function setup()
     var alternatingCounter = params.alternating_timer;
     var alternating = params.alternating;
     var isAlternative = true;
+    var textColour = params.text_colour;
 
     var timer = select("#timer");
     var body = select("#body");
@@ -45,7 +46,7 @@ function setup()
     var time = select("#time");
 
     timer.html(convertSeconds(counter));
-    body.style("background-color: #"+params.background_colour);
+    body.style("background-color: #"+params.background_colour+"; color: #"+textColour);
     school.html((decodeURI(params.school)));
     timerTitle.html(decodeURI(params.timer_title));
 
