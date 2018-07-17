@@ -29,14 +29,13 @@ function setup()
     var input_background_colour = select("#input_background_colour");
     var input_countdown_seconds = select("#input_countdown_seconds");
     var input_repeats = select("#input_repeats");
-    var input_alternate = select("#input_alternate");
+    var input_alternate = select("#input_alternates");
     var input_alternate_countdown = select("#input_alternate_countdown");
     var input_text_colour = select("#input_text_colour");
 
 
     function updatePreview()
     {
-        console.log(startTime.value());
         timer.html(convertSeconds(input_countdown_seconds.value()));
         school.html(input_school_name.value());
         timerTitle.html(input_timer_title.value());
