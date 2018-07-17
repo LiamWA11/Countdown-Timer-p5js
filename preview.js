@@ -14,7 +14,14 @@ $(document).ready(function(){
         scrollbar: true});
 });
 
+function fileSelected(file)
+{
+    console.log(file);
+    console.log(split(file.data, ';'));
+    document.cookie = "info="+split(file.data, ';')[0];
+    document.cookie = "img="+split(file.data, ';')[1];
 
+}
 
 function convertSeconds(s)
 {
@@ -28,6 +35,9 @@ function convertSeconds(s)
 function setup()
 {
     noCanvas();
+
+    var fileIn = createFileInput(fileSelected);
+
     var a = "a";
 
     var timer = select("#timer");
@@ -47,11 +57,12 @@ function setup()
     var input_alternate = select("#input_alternates");
     var input_alternate_countdown = select("#input_alternate_countdown");
     var input_text_colour = select("#input_text_colour");
+    var input_logo_browser = select("#input_browser");
 
+    fileIn.parent(input_logo_browser);
 
     function updatePreview()
     {
-        console.log(startTime.value());
         timer.html(convertSeconds(input_countdown_seconds.value()));
         school.html(input_school_name.value());
         timerTitle.html(input_timer_title.value());

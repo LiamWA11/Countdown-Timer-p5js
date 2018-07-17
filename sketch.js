@@ -19,7 +19,7 @@ function preload()
 
 function setup()
 {
-
+    console.log(document.cookie);
     console.log("Loading Timer");
     // URL Parameters:
     // seconds: Amount of seconds for timer
@@ -63,7 +63,7 @@ function setup()
 
     function timeIt()
     {
-        console.log(startTimerTime,hour(),minute(),second(),sx);
+        //console.log(startTimerTime,hour(),minute(),second(),sx);
         if (!running)
         {
             if (sx === -1)
