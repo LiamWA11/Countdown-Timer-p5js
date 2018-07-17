@@ -1,5 +1,6 @@
 var counter = 300;
 var startTime = 0;
+var timer_sound;
 
 function convertSeconds(s)
 {
@@ -10,8 +11,15 @@ function convertSeconds(s)
     return hours + ':' + minutes + ':' + seconds;
 }
 
+function preload()
+{
+    soundFormats('mp3', 'ogg');
+    timer_sound = loadSound("timer_sound.mp3");
+}
+
 function setup()
 {
+
     console.log("Loading Timer");
     // URL Parameters:
     // seconds: Amount of seconds for timer
@@ -40,11 +48,13 @@ function setup()
     var textColour = params.text_colour;
 
     var timer = select("#timer");
+    console.log(timer);
     var body = select("#body");
     var school = select("#school");
     var timerTitle = select("#timer_title");
     var time = select("#time");
 
+    console.log(counter);
     timer.html(convertSeconds(counter));
     body.style("background-color: #"+params.background_colour+"; color: #"+textColour);
     school.html((decodeURI(params.school)));
@@ -69,12 +79,14 @@ function setup()
         if (running)
         {
             var h = hour();
+            var hr = h;
             var timeSuffix = "am";
             if (h > 12)
             {
-                var hr = h % 12;
+                hr = h % 12;
                 timeSuffix = "pm";
             }
+            console.log(hr + "," + minute() + "," + second());
             time.html(nf(hr, 2) + ":" + nf(minute(), 2) + ":" + nf(second(),2) + " " + timeSuffix);
             var currentTime = floor((millis() - startTime)/1000);
 
@@ -93,6 +105,7 @@ function setup()
                             counter = alternatingCounter;
                             startTime = millis();
                             isAlternative = false;
+                            timer_sound.play();
                         }
                         else
                         {
@@ -100,6 +113,7 @@ function setup()
                             counter = counterOriginal;
                             startTime = millis();
                             isAlternative = true;
+                            timer_sound.play();
                         }
                     }
                     else
@@ -107,12 +121,14 @@ function setup()
                         console.log("Repeating Timer");
                         counter = counterOriginal;
                         startTime = millis();
+                        timer_sound.play();
                     }
                 }
                 else
                 {
                     console.log("TIMER FINISHED");
                     clearInterval(interval);
+                    timer_sound.play();
                 }
             }
         }

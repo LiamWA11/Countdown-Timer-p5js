@@ -46,10 +46,11 @@ function setup()
         startTimerTime.attribute("href", "timer.html?seconds="+input_countdown_seconds.value()+"&background_colour="+input_background_colour.value()+"&school="+input_school_name.value()+"&repeats="+input_repeats.value()+"&alternating="+input_alternate.value()+"&alternating_timer="+input_alternate_countdown.value()+"&timer_title="+input_timer_title.value()+"&text_colour="+input_text_colour.value()+"&start_time=now");
 
         var h = hour();
+        var hr = h;
         var timeSuffix = "am";
         if (h > 12)
         {
-            var hr = h % 12;
+            hr = h % 12;
             timeSuffix = "pm";
         }
         time.html(nf(hr, 2) + ":" + nf(minute(), 2) + ":" + nf(second(),2) + " " + timeSuffix);
