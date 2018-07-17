@@ -44,6 +44,7 @@ function setup()
     var repeatTimer = params.repeats;
     var alternatingCounter = params.alternating_timer;
     var alternating = params.alternating;
+    var startTimerTime = params.start_time;
     var isAlternative = true;
     var textColour = params.text_colour;
 
@@ -62,6 +63,7 @@ function setup()
 
     function timeIt()
     {
+        console.log(startTimerTime,hour(),minute(),second(),sx);
         if (!running)
         {
             if (sx === -1)
@@ -72,7 +74,14 @@ function setup()
             if (second() != sx)
             {
                 startTime = millis();
-                running = true;
+                if (startTimerTime === "now")
+                {
+                    running = true;
+                }
+                else if (startTimerTime === (hour()+":"+minute()))
+                {
+                    running = true;
+                }
             }
         }
 

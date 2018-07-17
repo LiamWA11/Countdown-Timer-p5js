@@ -1,6 +1,21 @@
 var counter = 300;
 var startTime = 0;
 
+$(document).ready(function(){
+    $('input.timepicker').timepicker({
+        timeFormat: 'HH:mm',
+        interval: 15,
+        minTime: '0',
+        maxTime: '23:59:59',
+        defaultTime: 'now',
+        startTime: '10:00',
+        dynamic: true,
+        dropdown: true,
+        scrollbar: true});
+});
+
+
+
 function convertSeconds(s)
 {
     var seconds = nf(s % 60, 2, 0);
@@ -36,13 +51,14 @@ function setup()
 
     function updatePreview()
     {
+        console.log(startTime.value());
         timer.html(convertSeconds(input_countdown_seconds.value()));
         school.html(input_school_name.value());
         timerTitle.html(input_timer_title.value());
         preview.style("background-color: #"+input_background_colour.value()+"; color: #"+input_text_colour.value());
         startTimer.attribute("href", "timer.html?seconds="+input_countdown_seconds.value()+"&background_colour="+input_background_colour.value()+"&school="+input_school_name.value()+"&repeats="+input_repeats.value()+"&alternating="+input_alternate.value()+"&alternating_timer="+input_alternate_countdown.value()+"&timer_title="+input_timer_title.value()+"&text_colour="+input_text_colour.value()+"&start_time=now");
 
-        startTimerTime.attribute("href", "timer.html?seconds="+input_countdown_seconds.value()+"&background_colour="+input_background_colour.value()+"&school="+input_school_name.value()+"&repeats="+input_repeats.value()+"&alternating="+input_alternate.value()+"&alternating_timer="+input_alternate_countdown.value()+"&timer_title="+input_timer_title.value()+"&text_colour="+input_text_colour.value()+"&start_time=now");
+        startTimerTime.attribute("href", "timer.html?seconds="+input_countdown_seconds.value()+"&background_colour="+input_background_colour.value()+"&school="+input_school_name.value()+"&repeats="+input_repeats.value()+"&alternating="+input_alternate.value()+"&alternating_timer="+input_alternate_countdown.value()+"&timer_title="+input_timer_title.value()+"&text_colour="+input_text_colour.value()+"&start_time="+startTime.value());
 
         var h = hour();
         var hr = h;
